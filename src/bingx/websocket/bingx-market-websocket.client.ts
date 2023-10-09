@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { filter, fromEvent, map, Observable, Subject, tap } from 'rxjs';
+import { filter, map, Observable, Subject, tap } from 'rxjs';
 import * as WebSocket from 'ws';
 import * as zlib from 'zlib';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
@@ -10,7 +10,7 @@ export class BingxMarketWebsocketClient {
     Record<string, number>
   >();
   private readonly symbols: string[] = [];
-  private client: WebSocketSubject<any>;
+  private client!: WebSocketSubject<any>;
 
   constructor() {
     this.connect();
@@ -45,7 +45,7 @@ export class BingxMarketWebsocketClient {
         return JSON.stringify(e);
       },
       url: url.toString(),
-      WebSocketCtor: WebSocket,
+      WebSocketCtor: WebSocket as never,
       openObserver: onOpen$,
       closeObserver: onClose$,
     });

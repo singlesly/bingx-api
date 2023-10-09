@@ -1,13 +1,27 @@
-import { EndpointInterface } from '@app/bingx/request/endpoint.interface';
+import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
 import { ApiKeyHeader } from '@app/bingx/headers/api-key-header';
 import { SignatureInterface } from '@app/bingx/account/signature.interface';
-import { Throughput } from '@app/bingx/rate-limit/throughput';
 import { AccountInterface } from '@app/bingx/account/account.interface';
 import { DefaultSignatureParameters } from '@app/bingx/account/default-signature-parameters';
 import { SignatureParametersInterface } from '@app/bingx/account/signature-parameters.interface';
-import { AccountThroughput } from '@app/bingx/rate-limit/account-throughput';
 
-export class BingxUserBalanceEndpoint implements EndpointInterface {
+export interface BalanceData {
+  balance: {
+    userId: string;
+    asset: 'USDT';
+    balance: string;
+    equity: string;
+    unrealizedProfit: string;
+    realisedProfit: string;
+    availableMargin: string;
+    usedMargin: string;
+    freezedMargin: string;
+  };
+}
+
+export class BingxUserBalanceEndpoint<R = BalanceData>
+  implements EndpointInterface<R>
+{
   constructor(private readonly account: AccountInterface) {}
 
   apiKey(): ApiKeyHeader {
@@ -30,7 +44,5 @@ export class BingxUserBalanceEndpoint implements EndpointInterface {
     return this.account.sign(this.parameters());
   }
 
-  throughput(): Throughput {
-    return new AccountThroughput();
-  }
+  readonly t!: R;
 }

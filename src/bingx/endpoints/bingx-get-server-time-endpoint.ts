@@ -1,13 +1,15 @@
-import { EndpointInterface } from '@app/bingx/request/endpoint.interface';
-import { Endpoint } from '@app/bingx/request/endpoint';
+import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
+import { Endpoint } from '@app/bingx/endpoints/endpoint';
 import { SignatureParametersInterface } from '@app/bingx/account/signature-parameters.interface';
-import { Throughput } from '@app/bingx/rate-limit/throughput';
 import { DefaultSignatureParameters } from '@app/bingx/account/default-signature-parameters';
-import { AccountThroughput } from '@app/bingx/rate-limit/account-throughput';
 
-export class BingxGetServerTimeEndpoint
+export interface BingxGetServerTimeResponseData {
+  serverTime: number;
+}
+
+export class BingxGetServerTimeEndpoint<R = BingxGetServerTimeResponseData>
   extends Endpoint
-  implements EndpointInterface
+  implements EndpointInterface<R>
 {
   method(): 'get' | 'post' | 'put' | 'patch' | 'delete' {
     return 'get';
@@ -21,7 +23,5 @@ export class BingxGetServerTimeEndpoint
     return '/openApi/swap/v2/server/time';
   }
 
-  throughput(): Throughput {
-    return new AccountThroughput();
-  }
+  readonly t!: R;
 }

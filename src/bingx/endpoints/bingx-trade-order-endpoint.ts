@@ -1,15 +1,27 @@
-import { EndpointInterface } from '@app/bingx/request/endpoint.interface';
-import { Endpoint } from '@app/bingx/request/endpoint';
+import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
+import { Endpoint } from '@app/bingx/endpoints/endpoint';
 import { SignatureParametersInterface } from '../account/signature-parameters.interface';
-import { Throughput } from '@app/bingx/rate-limit/throughput';
-import { MarketThroughput } from '@app/bingx/rate-limit/market-throughput';
 import { AccountInterface } from '@app/bingx/account/account.interface';
 import { BingxCreateTradeOrderInterface } from '@app/bingx/interfaces/trade-order.interface';
 import { DefaultSignatureParameters } from '@app/bingx/account/default-signature-parameters';
+import { OrderSideEnum } from '@app/bingx/enums/order-side.enum';
+import { OrderTypeEnum } from '@app/bingx/enums/order-type.enum';
+import { OrderPositionSideEnum } from '@app/bingx/enums/order-position-side.enum';
 
-export class BingxTradeOrderEndpoint
+export interface BingxOrderInterface {
+  order: {
+    symbol: string;
+    side: OrderSideEnum;
+    type: OrderTypeEnum;
+    positionSide: OrderPositionSideEnum;
+    orderId: number;
+    clientOrderId: string;
+  };
+}
+
+export class BingxTradeOrderEndpoint<R = BingxOrderInterface>
   extends Endpoint
-  implements EndpointInterface
+  implements EndpointInterface<R>
 {
   constructor(
     private readonly order: BingxCreateTradeOrderInterface,
@@ -17,6 +29,8 @@ export class BingxTradeOrderEndpoint
   ) {
     super(account);
   }
+
+  readonly t!: R;
 
   method(): 'get' | 'post' | 'put' | 'patch' | 'delete' {
     return 'post';
@@ -30,9 +44,5 @@ export class BingxTradeOrderEndpoint
 
   path(): string {
     return '/openApi/swap/v2/trade/order';
-  }
-
-  throughput(): Throughput {
-    return new MarketThroughput();
   }
 }

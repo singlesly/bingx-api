@@ -1,16 +1,22 @@
-import { Endpoint } from '@app/bingx/request/endpoint';
-import { EndpointInterface } from '@app/bingx/request/endpoint.interface';
+import { Endpoint } from '@app/bingx/endpoints/endpoint';
+import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
 import { SignatureParametersInterface } from '@app/bingx/account/signature-parameters.interface';
-import { Throughput } from '@app/bingx/rate-limit/throughput';
 import { DefaultSignatureParameters } from '@app/bingx/account/default-signature-parameters';
-import { MarketThroughput } from '@app/bingx/rate-limit/market-throughput';
 import { AccountInterface } from '@app/bingx/account/account.interface';
 
-export class BingxCancelAllOrdersEndpoint
+export interface CancelAllOrdersData {
+  success: unknown[];
+  failed: unknown[];
+}
+
+export class BingxCancelAllOrdersEndpoint<R = CancelAllOrdersData>
   extends Endpoint
-  implements EndpointInterface
+  implements EndpointInterface<R>
 {
-  constructor(private readonly symbol: string, account: AccountInterface) {
+  constructor(
+    private readonly symbol: string,
+    account: AccountInterface,
+  ) {
     super(account);
   }
 
@@ -28,7 +34,5 @@ export class BingxCancelAllOrdersEndpoint
     return '/openApi/swap/v2/trade/allOpenOrders';
   }
 
-  throughput(): Throughput {
-    return new MarketThroughput();
-  }
+  readonly t!: R;
 }

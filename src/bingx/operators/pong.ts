@@ -1,4 +1,4 @@
-import { filter, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { WebSocketSubject } from 'rxjs/webSocket';
 
 export function pong<T>(source: WebSocketSubject<T>): Observable<T> {

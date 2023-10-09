@@ -29,9 +29,8 @@ export class BingxWebsocketClient {
       return;
     }
 
-    const { listenKey } = await this.bingxListenKeyService.generateListenKey(
-      account,
-    );
+    const { listenKey } =
+      await this.bingxListenKeyService.generateListenKey(account);
     const url = new URL('/swap-market', 'wss://open-api-swap.bingx.com');
     url.searchParams.set('listenKey', listenKey);
 
@@ -94,11 +93,12 @@ export class BingxWebsocketClient {
 
   public async interrupt(account: AccountInterface): Promise<void> {
     setTimeout(() => {
-      if (!this.listeners.has(account.getApiKey())) {
+      const listener = this.listeners.get(account.getApiKey());
+      if (!listener) {
         return;
       }
 
-      const [, client] = this.listeners.get(account.getApiKey());
+      const [, client] = listener;
 
       console.log('interrupt connection for', account.getApiKey());
 

@@ -1,14 +1,18 @@
-import { Endpoint } from '@app/bingx/request/endpoint';
-import { EndpointInterface } from '@app/bingx/request/endpoint.interface';
+import { Endpoint } from '@app/bingx/endpoints/endpoint';
+import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
 import { SignatureParametersInterface } from '@app/bingx/account/signature-parameters.interface';
-import { Throughput } from '@app/bingx/rate-limit/throughput';
 import { DefaultSignatureParameters } from '@app/bingx/account/default-signature-parameters';
-import { MarketThroughput } from '@app/bingx/rate-limit/market-throughput';
 
-export class BingxCloseAllPositionsEndpoint
+export interface BingxCloseAllPositionsData {
+  success: number[];
+  failed: number[];
+}
+
+export class BingxCloseAllPositionsEndpoint<R = BingxCloseAllPositionsData>
   extends Endpoint
-  implements EndpointInterface
+  implements EndpointInterface<R>
 {
+  readonly t!: R;
   method(): 'get' | 'post' | 'put' | 'patch' | 'delete' {
     return 'post';
   }
@@ -19,9 +23,5 @@ export class BingxCloseAllPositionsEndpoint
 
   path(): string {
     return '/openApi/swap/v2/trade/closeAllPositions';
-  }
-
-  throughput(): Throughput {
-    return new MarketThroughput();
   }
 }
