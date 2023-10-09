@@ -1,0 +1,1 @@
+export const BINGX_API_KEY_HEADER = 'X-BX-APIKEY';
