@@ -1,6 +1,6 @@
 {
   "name": "bingx-api",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "",
   "author": "",
   "private": true,
@@ -17,7 +17,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "@nestjs/axios": "^3.0.0",
@@ -74,5 +75,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/singlesly/bingx-api.git"
   }
 }
