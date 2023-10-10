@@ -4,7 +4,7 @@ import { SignatureParametersInterface } from '@app/bingx/account/signature-param
 import { SignatureInterface } from '@app/bingx/account/signature.interface';
 import { AccountInterface } from '@app/bingx/account/account.interface';
 
-export abstract class Endpoint implements EndpointInterface {
+export abstract class Endpoint<R = unknown> implements EndpointInterface<R> {
   public constructor(protected readonly account: AccountInterface) {}
 
   apiKey(): ApiKeyHeader {
@@ -20,4 +20,6 @@ export abstract class Endpoint implements EndpointInterface {
   abstract parameters(): SignatureParametersInterface;
 
   abstract path(): string;
+
+  abstract readonly t: R;
 }
