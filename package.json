@@ -1,9 +1,11 @@
 {
   "name": "bingx-api",
-  "version": "0.0.0-development",
+  "version": "1.2.0",
   "description": "",
   "author": "",
   "private": false,
+  "files": ["dist"],
+  "main": "dist/index.js",
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
@@ -18,7 +20,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@nestjs/axios": "^3.0.0",
