@@ -5,16 +5,22 @@ import { AccountService } from '@app/bingx-client/services/account.service';
 
 export class BingxApiClient {
   private readonly services = {
-    [ListenKeyService.constructor.name]: new ListenKeyService(
-      this.requestExecutor,
-    ),
-    [TradeService.constructor.name]: new TradeService(this.requestExecutor),
-    [AccountService.constructor.name]: new AccountService(this.requestExecutor),
+    [ListenKeyService.name]: new ListenKeyService(this.requestExecutor),
+    [TradeService.name]: new TradeService(this.requestExecutor),
+    [AccountService.name]: new AccountService(this.requestExecutor),
   };
 
   constructor(private readonly requestExecutor: RequestExecutorInterface) {}
 
-  public getListenKeyService() {
-    return this.services[ListenKeyService.constructor.name];
+  public getListenKeyService(): ListenKeyService {
+    return this.services[ListenKeyService.name] as ListenKeyService;
+  }
+
+  public getTradeService(): TradeService {
+    return this.services[TradeService.name] as TradeService;
+  }
+
+  public getAccountService(): AccountService {
+    return this.services[AccountService.name] as AccountService;
   }
 }
