@@ -6,8 +6,6 @@ import { BingxResponseInterface } from '@app/bingx/endpoints/bingx-response.inte
 import axios from 'axios';
 
 export class BingxRequest<R> implements BingxRequestInterface<R> {
-  // private readonly client = client;
-
   private readonly http = new HttpService(
     axios.create({
       baseURL: 'https://open-api.bingx.com',

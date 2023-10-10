@@ -19,7 +19,7 @@ export interface BalanceData {
   };
 }
 
-export class BingxUserBalanceEndpoint<R = BalanceData>
+export class BingxGetPerpetualSwapAccountAssetEndpoint<R = BalanceData>
   implements EndpointInterface<R>
 {
   constructor(private readonly account: AccountInterface) {}
