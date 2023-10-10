@@ -17,7 +17,7 @@ export class BingxRequest<R> implements BingxRequestInterface<R> {
 
   constructor(private readonly endpoint: EndpointInterface<R>) {}
 
-  async getResponse(): Promise<Readonly<BingxResponseInterface<R>>> {
+  async getResponse(): Promise<Readonly<R>> {
     const response = await lastValueFrom(
       this.http.request({
         method: this.endpoint.method(),

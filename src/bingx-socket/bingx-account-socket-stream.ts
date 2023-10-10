@@ -18,8 +18,16 @@ import {
   AccountWebsocketEventType,
   ListenKeyExpiredEvent,
 } from '@app/bingx-socket/events/account-websocket-events';
+import * as WebSocket from 'ws';
+import zlib from 'zlib';
+
+export interface BingxAccountSocketStreamConfiguration {
+  requestExecutor?: RequestExecutorInterface;
+  url?: URL;
+}
 
 export class BingxAccountSocketStream {
+  private readonly configuration: Required<BingxAccountSocketStreamConfiguration>;
   public readonly onConnect$ = new Subject();
   public readonly onDisconnect$ = new Subject();
   public readonly heartbeat$ = new ReplaySubject<HeartbeatInterface>(1);
@@ -31,32 +39,43 @@ export class BingxAccountSocketStream {
 
   constructor(
     private readonly account: AccountInterface,
-    private readonly requestExecutor: RequestExecutorInterface = new HttpRequestExecutor(),
+    configuration: BingxAccountSocketStreamConfiguration = {},
   ) {
-    this.connect(this.account, this.requestExecutor);
+    this.configuration = {
+      requestExecutor:
+        configuration.requestExecutor ?? new HttpRequestExecutor(),
+      url:
+        configuration.url ??
+        new URL('/swap-market', 'wss://open-api-swap.bingx.com'),
+    };
+
+    this.connect(this.account, this.configuration.requestExecutor);
   }
 
   private async connect(
     account: AccountInterface,
     requestExecutor: RequestExecutorInterface,
   ): Promise<void> {
-    const {
-      data: { listenKey },
-    } = await requestExecutor.execute(
+    const responseKey = await requestExecutor.execute(
       new BingxGenerateListenKeyEndpoint(account),
     );
 
-    const url = new URL('/swap-market', 'wss://open-api-swap.bingx.com');
-    url.searchParams.set('listenKey', listenKey);
+    const url = this.configuration.url;
+    url.searchParams.set('listenKey', responseKey.listenKey);
+    this.onDisconnect$.subscribe((e) => {
+      debugger;
+    });
 
     const socket$ = webSocket<AccountWebSocketEvent>({
-      ...new BingxWebsocketDeserializer(),
-      ...new BingxWebsocketSerializer(),
+      deserializer: (e) => new BingxWebsocketDeserializer().deserializer(e),
+      serializer: (e) => new BingxWebsocketSerializer().serializer(e),
       url: url.toString(),
-      WebSocketCtor: WebSocket,
+      WebSocketCtor: WebSocket as never,
       openObserver: this.onConnect$,
       closeObserver: this.onDisconnect$,
     });
+
+    this.onConnect$.subscribe(() => {});
 
     socket$
       .pipe(
@@ -77,6 +96,8 @@ export class BingxAccountSocketStream {
           this.accountOrderUpdatePushEvent$,
         ),
       )
-      .subscribe();
+      .subscribe({
+        next: (e) => {},
+      });
   }
 }

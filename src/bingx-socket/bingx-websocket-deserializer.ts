@@ -1,5 +1,5 @@
 import { WebSocketSubjectConfig } from 'rxjs/internal/observable/dom/WebSocketSubject';
-import zlib from 'zlib';
+import * as zlib from 'zlib';
 
 export class BingxWebsocketDeserializer
   implements Required<Pick<WebSocketSubjectConfig<any>, 'deserializer'>>
