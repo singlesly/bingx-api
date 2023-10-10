@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AccountInterface } from '@app/bingx/account/account.interface';
 import * as WebSocket from 'ws';
-import { BingxListenKeyService } from '@app/bingx/services/bingx-listen-key.service';
+import { BingxListenKeyService } from '@app/bingx-client/services/bingx-listen-key.service';
 import * as zlib from 'zlib';
 import { share, Subject } from 'rxjs';
 import { WebsocketEvent } from '@app/bingx/interfaces/websocket-event';

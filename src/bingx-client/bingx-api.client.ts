@@ -1,7 +1,7 @@
 import { RequestExecutorInterface } from '@app/bingx/request-executor/request-executor.interface';
-import { ListenKeyService } from '@app/bingx/services/listen-key.service';
-import { TradeService } from '@app/bingx/services/trade.service';
-import { AccountService } from '@app/bingx/services/account.service';
+import { ListenKeyService } from '@app/bingx-client/services/listen-key.service';
+import { TradeService } from '@app/bingx-client/services/trade.service';
+import { AccountService } from '@app/bingx-client/services/account.service';
 
 export class BingxApiClient {
   private readonly services = {

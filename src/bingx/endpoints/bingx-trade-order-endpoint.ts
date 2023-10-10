@@ -8,7 +8,7 @@ import { OrderSideEnum } from '@app/bingx/enums/order-side.enum';
 import { OrderTypeEnum } from '@app/bingx/enums/order-type.enum';
 import { OrderPositionSideEnum } from '@app/bingx/enums/order-position-side.enum';
 
-export interface BingxOrderInterface {
+export interface BingxOrderResponseInterface {
   order: {
     symbol: string;
     side: OrderSideEnum;
@@ -19,7 +19,7 @@ export interface BingxOrderInterface {
   };
 }
 
-export class BingxTradeOrderEndpoint<R = BingxOrderInterface>
+export class BingxTradeOrderEndpoint<R = BingxOrderResponseInterface>
   extends Endpoint
   implements EndpointInterface<R>
 {

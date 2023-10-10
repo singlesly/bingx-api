@@ -1,4 +1,4 @@
-export class BingxResponse<T> {
+export interface BingxResponse<T> {
   code: number;
   msg: number;
   data: T;
