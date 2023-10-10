@@ -19,7 +19,6 @@ import {
   ListenKeyExpiredEvent,
 } from '@app/bingx-socket/events/account-websocket-events';
 import * as WebSocket from 'ws';
-import zlib from 'zlib';
 
 export interface BingxAccountSocketStreamConfiguration {
   requestExecutor?: RequestExecutorInterface;
@@ -62,9 +61,6 @@ export class BingxAccountSocketStream {
 
     const url = this.configuration.url;
     url.searchParams.set('listenKey', responseKey.listenKey);
-    this.onDisconnect$.subscribe((e) => {
-      debugger;
-    });
 
     const socket$ = webSocket<AccountWebSocketEvent>({
       deserializer: (e) => new BingxWebsocketDeserializer().deserializer(e),
@@ -75,9 +71,7 @@ export class BingxAccountSocketStream {
       closeObserver: this.onDisconnect$,
     });
 
-    this.onConnect$.subscribe(() => {});
-
-    socket$
+    const socketSubscription = socket$
       .pipe(
         pong(socket$, this.heartbeat$),
         filterAndEmitToSubject(
@@ -96,8 +90,11 @@ export class BingxAccountSocketStream {
           this.accountOrderUpdatePushEvent$,
         ),
       )
-      .subscribe({
-        next: (e) => {},
-      });
+      .subscribe();
+
+    this.onDisconnect$.subscribe(() => {
+      socketSubscription.unsubscribe();
+      this.connect(account, requestExecutor);
+    });
   }
 }
