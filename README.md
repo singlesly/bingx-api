@@ -25,6 +25,20 @@ const userBalance = await client
                   .getPerpetualSwapAccountAssetInformation();
 ```
 
+* Works with sockets
+```typescript
+const account = new ApiAccount('xxx', 'xxx');
+stream = new BingxAccountSocketStream(account);
+
+stream.heartbeat$.subscribe((v) => {})
+
+stream.listenKeyExpired$.subscribe((v) => {})
+
+stream.accountBalanceAndPositionPush$.subscribe((v) => {})
+
+stream.accountOrderUpdatePushEvent$.subscribe((v) => {})
+```
+
 ### Features supports
 
 * Account Interface
@@ -61,7 +75,7 @@ const userBalance = await client
         - [ ] Subscribe the Latest Trade Detail
         - [ ] Subscribe K-Line Data
     * Account Data
-        - [ ] Listen Key expired push
-        - [ ] Account balance and position update push
-        - [ ] Order update push
+        - [x] Listen Key expired push
+        - [x] Account balance and position update push
+        - [x] Order update push
         - [ ] Configuration updates such as leverage and margin mode

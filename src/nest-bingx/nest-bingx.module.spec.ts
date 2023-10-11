@@ -1,7 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import {
-  BingxResponseInterface,
-  EndpointInterface,
   HttpRequestExecutor,
   NestBingxModule,
   RequestExecutorInterface,
@@ -56,7 +54,7 @@ describe('nest bingx module', () => {
     let client: BingxApiClient;
 
     class TestExecutor implements RequestExecutorInterface {
-      async execute<T>(): Promise<BingxResponseInterface<T>> {
+      async execute<T>(): Promise<T> {
         return {} as never;
       }
     }
