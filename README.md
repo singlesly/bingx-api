@@ -1,7 +1,9 @@
 ### Bingx API NodeJS Client
 This library implements [Bingx API](https://bingx-api.github.io/docs/#/swapV2/introduce) for nodejs applications
 
-[![CodeQL](https://github.com/singlesly/bingx-api/actions/workflows/codeql.yml/badge.svg)](https://github.com/singlesly/bingx-api/actions/workflows/codeql.yml) [![Release](https://github.com/singlesly/bingx-api/actions/workflows/release.yml/badge.svg)](https://github.com/singlesly/bingx-api/actions/workflows/release.yml)
+[![CodeQL](https://github.com/singlesly/bingx-api/actions/workflows/codeql.yml/badge.svg)](https://github.com/singlesly/bingx-api/actions/workflows/codeql.yml)
+[![Release](https://github.com/singlesly/bingx-api/actions/workflows/release.yml/badge.svg)](https://github.com/singlesly/bingx-api/actions/workflows/release.yml)
+[![ESLint](https://github.com/singlesly/bingx-api/actions/workflows/eslint.yml/badge.svg?branch=main)](https://github.com/singlesly/bingx-api/actions/workflows/eslint.yml)
 
 ### Getting started
 * Install via npm
