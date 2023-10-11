@@ -9,7 +9,7 @@ export class ListenKeyService {
 
   async generateListenKey(
     account: AccountInterface,
-  ): Promise<BingxResponseInterface<BingxGenerateListenKeyResponse>> {
+  ): Promise<BingxGenerateListenKeyResponse> {
     return this.requestExecutor.execute(
       new BingxGenerateListenKeyEndpoint(account),
     );
