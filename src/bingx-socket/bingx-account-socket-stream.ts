@@ -1,4 +1,4 @@
-import { ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { AccountInterface } from '@app/bingx/account/account.interface';
 import {
   BingxGenerateListenKeyEndpoint,
@@ -26,9 +26,10 @@ export interface BingxAccountSocketStreamConfiguration {
 }
 
 export class BingxAccountSocketStream {
+  private forceClose$ = new BehaviorSubject<boolean>(false);
   private readonly configuration: Required<BingxAccountSocketStreamConfiguration>;
   public readonly onConnect$ = new Subject();
-  public readonly onDisconnect$ = new Subject();
+  public readonly onDisconnect$ = new Subject<CloseEvent>();
   public readonly heartbeat$ = new ReplaySubject<HeartbeatInterface>(1);
   public readonly listenKeyExpired$ = new Subject<ListenKeyExpiredEvent>();
   public readonly accountBalanceAndPositionPush$ =
@@ -94,7 +95,20 @@ export class BingxAccountSocketStream {
 
     this.onDisconnect$.subscribe(() => {
       socketSubscription.unsubscribe();
-      this.connect(account, requestExecutor);
+
+      if (!this.forceClose$.value) {
+        this.connect(account, requestExecutor);
+      }
     });
+
+    this.forceClose$.subscribe((v) => {
+      if (v) {
+        socket$.complete();
+      }
+    });
+  }
+
+  public disconnect() {
+    this.forceClose$.next(true);
   }
 }
