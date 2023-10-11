@@ -4,5 +4,5 @@ export * from './endpoints';
 export * from './enums';
 export * from './headers';
 export * from './interfaces';
-export * from './operators';
+export * from '../bingx-socket/operators';
 export * from './request-executor';
