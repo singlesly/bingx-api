@@ -50,10 +50,48 @@ export class BingxAccountSocketStreamPool {
   public addAccount(account: AccountInterface) {
     const stream = new BingxAccountSocketStream(account, this.configuration);
 
-    stream.heartbeat$.pipe(map((v) => [account, v]));
-    stream.listenKeyExpired$.pipe(map((v) => [account, v]));
-    stream.accountBalanceAndPositionPush$.pipe(map((v) => [account, v]));
-    stream.accountOrderUpdatePushEvent$.pipe(map((v) => [account, v]));
+    stream.heartbeat$
+      .pipe(
+        map<HeartbeatInterface, [AccountInterface, HeartbeatInterface]>((v) => [
+          account,
+          v,
+        ]),
+      )
+      .subscribe((value) => {
+        this.heartbeat$.next(value);
+      });
+
+    stream.listenKeyExpired$
+      .pipe(
+        map<ListenKeyExpiredEvent, [AccountInterface, ListenKeyExpiredEvent]>(
+          (v) => [account, v],
+        ),
+      )
+      .subscribe((value) => {
+        this.listenKeyExpired$.next(value);
+      });
+
+    stream.accountBalanceAndPositionPush$
+      .pipe(
+        map<
+          AccountBalanceAndPositionPushEvent,
+          [AccountInterface, AccountBalanceAndPositionPushEvent]
+        >((v) => [account, v]),
+      )
+      .subscribe((value) => {
+        this.accountBalanceAndPositionPush$.next(value);
+      });
+
+    stream.accountOrderUpdatePushEvent$
+      .pipe(
+        map<
+          AccountOrderUpdatePushEvent,
+          [AccountInterface, AccountOrderUpdatePushEvent]
+        >((v) => [account, v]),
+      )
+      .subscribe((value) => {
+        this.accountOrderUpdatePushEvent$.next(value);
+      });
 
     this.accounts[account.getApiKey()] = [account, stream];
   }
