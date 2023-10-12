@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { AccountInterface } from '@app/bingx/account/account.interface';
 import {
   BingxGenerateListenKeyEndpoint,

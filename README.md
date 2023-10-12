@@ -39,6 +39,16 @@ stream.accountBalanceAndPositionPush$.subscribe((v) => {})
 stream.accountOrderUpdatePushEvent$.subscribe((v) => {})
 ```
 
+```typescript
+stream = new BingxMarketSocketStream(account);
+
+stream.subscribe('BTC-USDT@trade');
+
+stream.latestTradeDetail$.subscribe((v) => {})
+
+```
+
+
 ### Features supports
 
 * Account Interface
@@ -72,7 +82,7 @@ stream.accountOrderUpdatePushEvent$.subscribe((v) => {})
 * Socket API
     * Market Data
         - [ ] Subscribe Market Depth Data
-        - [ ] Subscribe the Latest Trade Detail
+        - [x] Subscribe the Latest Trade Detail
         - [ ] Subscribe K-Line Data
     * Account Data
         - [x] Listen Key expired push
