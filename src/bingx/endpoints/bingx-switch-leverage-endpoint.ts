@@ -35,7 +35,7 @@ export class BingxSwitchLeverageEndpoint
   parameters(): SignatureParametersInterface {
     return new DefaultSignatureParameters({
       symbol: this.symbol,
-      leverage: this.leverage,
+      leverage: this.leverage.toString(10),
       side: this.side,
     });
   }
