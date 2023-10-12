@@ -4,6 +4,10 @@ import { AccountInterface } from '@app/bingx/account/account.interface';
 import { BingxTradeOrderEndpoint } from '@app/bingx/endpoints/bingx-trade-order-endpoint';
 import { BingxCloseAllPositionsEndpoint } from '@app/bingx/endpoints/bingx-close-all-positions-endpoint';
 import { BingxCancelAllOrdersEndpoint } from '@app/bingx/endpoints/bingx-cancel-all-orders-endpoint';
+import {
+  BingxSwitchMarginModeEndpoint,
+  MarginType,
+} from '@app/bingx/endpoints/bingx-switch-margin-mode-endpoint';
 
 export class TradeService {
   constructor(private readonly requestExecutor: RequestExecutorInterface) {}
@@ -26,6 +30,16 @@ export class TradeService {
   public cancelAllOrders(symbol: string, account: AccountInterface) {
     return this.requestExecutor.execute(
       new BingxCancelAllOrdersEndpoint(symbol, account),
+    );
+  }
+
+  public switchMarginMode(
+    symbol: string,
+    marginType: MarginType,
+    account: AccountInterface,
+  ) {
+    return this.requestExecutor.execute(
+      new BingxSwitchMarginModeEndpoint(symbol, marginType, account),
     );
   }
 }
