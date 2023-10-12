@@ -5,7 +5,7 @@
   "author": "",
   "private": false,
   "files": [
-    "dist"
+    "dist/**"
   ],
   "main": "dist/index.js",
   "license": "UNLICENSED",
