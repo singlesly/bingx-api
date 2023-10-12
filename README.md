@@ -82,7 +82,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
 * Socket API
     * Market Data
         - [ ] Subscribe Market Depth Data
-        - [ ] Subscribe the Latest Trade Detail
+        - [x] Subscribe the Latest Trade Detail
         - [ ] Subscribe K-Line Data
     * Account Data
         - [x] Listen Key expired push
