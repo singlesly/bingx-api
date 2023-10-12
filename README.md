@@ -39,6 +39,16 @@ stream.accountBalanceAndPositionPush$.subscribe((v) => {})
 stream.accountOrderUpdatePushEvent$.subscribe((v) => {})
 ```
 
+```typescript
+stream = new BingxMarketSocketStream(account);
+
+stream.subscribe('BTC-USDT@trade');
+
+stream.latestTradeDetail$.subscribe((v) => {})
+
+```
+
+
 ### Features supports
 
 * Account Interface
