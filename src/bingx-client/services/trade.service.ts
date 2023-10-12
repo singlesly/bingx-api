@@ -8,6 +8,8 @@ import {
   BingxSwitchMarginModeEndpoint,
   MarginType,
 } from '@app/bingx/endpoints/bingx-switch-margin-mode-endpoint';
+import { BingxSwitchLeverageEndpoint } from '@app/bingx/endpoints/bingx-switch-leverage-endpoint';
+import { OrderPositionSideEnum } from '@app/bingx';
 
 export class TradeService {
   constructor(private readonly requestExecutor: RequestExecutorInterface) {}
@@ -40,6 +42,17 @@ export class TradeService {
   ) {
     return this.requestExecutor.execute(
       new BingxSwitchMarginModeEndpoint(symbol, marginType, account),
+    );
+  }
+
+  public switchLeverage(
+    symbol: string,
+    leverage: number,
+    side: OrderPositionSideEnum,
+    account: AccountInterface,
+  ) {
+    return this.requestExecutor.execute(
+      new BingxSwitchLeverageEndpoint(symbol, leverage, side, account),
     );
   }
 }
