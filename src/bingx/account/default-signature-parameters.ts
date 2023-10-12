@@ -5,7 +5,7 @@ export class DefaultSignatureParameters
 {
   constructor(
     private readonly parameters:
-      | Record<string, string>
+      | Record<string, string | number>
       | string
       | URLSearchParams = {},
     private readonly overrideTimestamp: number = Date.now(),
