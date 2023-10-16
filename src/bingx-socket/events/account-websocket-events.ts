@@ -137,4 +137,5 @@ export interface AccountBalanceAndPositionPushEvent
 export interface AccountOrderUpdatePushEvent extends AccountWebSocketEvent {
   e: AccountWebsocketEventType.ORDER_TRADE_UPDATE;
   E: EventTimeInMilliseconds;
+  o: AccountWebSocketOrder;
 }
