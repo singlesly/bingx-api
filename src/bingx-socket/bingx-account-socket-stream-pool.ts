@@ -1,15 +1,15 @@
-import { AccountInterface, HttpRequestExecutor } from '@app/bingx';
+import { AccountInterface, HttpRequestExecutor } from 'bingx-api/bingx';
 import {
   BingxAccountSocketStream,
   BingxAccountSocketStreamConfiguration,
-} from '@app/bingx-socket/bingx-account-socket-stream';
+} from 'bingx-api/bingx-socket/bingx-account-socket-stream';
 import { map, ReplaySubject, Subject } from 'rxjs';
-import { HeartbeatInterface } from '@app/bingx-socket/interfaces/heartbeat.interface';
+import { HeartbeatInterface } from 'bingx-api/bingx-socket/interfaces/heartbeat.interface';
 import {
   AccountBalanceAndPositionPushEvent,
   AccountOrderUpdatePushEvent,
   ListenKeyExpiredEvent,
-} from '@app/bingx-socket/events/account-websocket-events';
+} from 'bingx-api/bingx-socket/events/account-websocket-events';
 
 export class BingxAccountSocketStreamPool {
   private readonly configuration: Required<BingxAccountSocketStreamConfiguration>;

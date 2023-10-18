@@ -1,8 +1,8 @@
-import { Endpoint } from '@app/bingx/endpoints/endpoint';
-import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
-import { SignatureParametersInterface } from '@app/bingx/account/signature-parameters.interface';
-import { DefaultSignatureParameters } from '@app/bingx/account/default-signature-parameters';
-import { AccountInterface } from '@app/bingx/account/account.interface';
+import { Endpoint } from 'bingx-api/bingx/endpoints/endpoint';
+import { EndpointInterface } from 'bingx-api/bingx/endpoints/endpoint.interface';
+import { SignatureParametersInterface } from 'bingx-api/bingx/account/signature-parameters.interface';
+import { DefaultSignatureParameters } from 'bingx-api/bingx/account/default-signature-parameters';
+import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
 
 export interface CancelAllOrdersData {
   success: unknown[];

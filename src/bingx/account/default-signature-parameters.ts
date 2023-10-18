@@ -1,4 +1,4 @@
-import { SignatureParametersInterface } from '@app/bingx/account/signature-parameters.interface';
+import { SignatureParametersInterface } from 'bingx-api/bingx/account/signature-parameters.interface';
 
 export class DefaultSignatureParameters
   implements SignatureParametersInterface

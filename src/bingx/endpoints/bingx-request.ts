@@ -1,8 +1,7 @@
-import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
+import { EndpointInterface } from 'bingx-api/bingx/endpoints/endpoint.interface';
 import { lastValueFrom } from 'rxjs';
-import { BingxRequestInterface } from '@app/bingx/endpoints/bingx-request.interface';
+import { BingxRequestInterface } from 'bingx-api/bingx/endpoints/bingx-request.interface';
 import { HttpService } from '@nestjs/axios';
-import { BingxResponseInterface } from '@app/bingx/endpoints/bingx-response.interface';
 import axios from 'axios';
 
 export class BingxRequest<R> implements BingxRequestInterface<R> {

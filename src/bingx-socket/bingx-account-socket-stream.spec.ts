@@ -1,7 +1,7 @@
 import { Server, WebSocket } from 'ws';
-import { getPortFree } from '@app/get-port';
-import { ApiAccount } from '@app/bingx/account/api-account';
-import { BingxAccountSocketStream } from '@app/bingx-socket/bingx-account-socket-stream';
+import { getPortFree } from 'bingx-api/get-port';
+import { ApiAccount } from 'bingx-api/bingx/account/api-account';
+import { BingxAccountSocketStream } from 'bingx-api/bingx-socket/bingx-account-socket-stream';
 import * as zlib from 'zlib';
 import { skip } from 'rxjs';
 

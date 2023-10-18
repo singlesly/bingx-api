@@ -1,12 +1,12 @@
-import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
-import { Endpoint } from '@app/bingx/endpoints/endpoint';
+import { EndpointInterface } from 'bingx-api/bingx/endpoints/endpoint.interface';
+import { Endpoint } from 'bingx-api/bingx/endpoints/endpoint';
 import { SignatureParametersInterface } from '../account/signature-parameters.interface';
-import { AccountInterface } from '@app/bingx/account/account.interface';
-import { BingxCreateTradeOrderInterface } from '@app/bingx/interfaces/trade-order.interface';
-import { DefaultSignatureParameters } from '@app/bingx/account/default-signature-parameters';
-import { OrderSideEnum } from '@app/bingx/enums/order-side.enum';
-import { OrderTypeEnum } from '@app/bingx/enums/order-type.enum';
-import { OrderPositionSideEnum } from '@app/bingx/enums/order-position-side.enum';
+import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
+import { BingxCreateTradeOrderInterface } from 'bingx-api/bingx/interfaces/trade-order.interface';
+import { DefaultSignatureParameters } from 'bingx-api/bingx/account/default-signature-parameters';
+import { OrderSideEnum } from 'bingx-api/bingx/enums/order-side.enum';
+import { OrderTypeEnum } from 'bingx-api/bingx/enums/order-type.enum';
+import { OrderPositionSideEnum } from 'bingx-api/bingx/enums/order-position-side.enum';
 
 export interface BingxOrderResponseInterface {
   order: {

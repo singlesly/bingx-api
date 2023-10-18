@@ -5,7 +5,7 @@ import {
   EndpointInterface,
   OrderPositionSideEnum,
   SignatureParametersInterface,
-} from '@app/bingx';
+} from 'bingx-api/bingx';
 
 export interface SwitchLeverageResponse {}
 

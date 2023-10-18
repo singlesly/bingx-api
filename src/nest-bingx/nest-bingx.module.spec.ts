@@ -3,8 +3,8 @@ import {
   HttpRequestExecutor,
   NestBingxModule,
   RequestExecutorInterface,
-} from '@app/index';
-import { BingxApiClient } from '@app/index';
+} from 'bingx-api/index';
+import { BingxApiClient } from 'bingx-api/index';
 
 describe('nest bingx module', () => {
   describe('with default http request executor', () => {

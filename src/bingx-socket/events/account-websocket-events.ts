@@ -1,4 +1,4 @@
-import { OrderPositionSideEnum, OrderSideEnum } from '@app/bingx';
+import { OrderPositionSideEnum, OrderSideEnum } from 'bingx-api/bingx';
 
 export enum AccountWebsocketEventType {
   LISTEN_KEY_EXPIRED = 'listenKeyExpired',

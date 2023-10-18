@@ -1,23 +1,23 @@
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { AccountInterface } from '@app/bingx/account/account.interface';
+import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
 import {
   BingxGenerateListenKeyEndpoint,
   HttpRequestExecutor,
   pong,
   RequestExecutorInterface,
-} from '@app/bingx';
+} from 'bingx-api/bingx';
 import { webSocket } from 'rxjs/webSocket';
-import { BingxWebsocketDeserializer } from '@app/bingx-socket/bingx-websocket-deserializer';
-import { BingxWebsocketSerializer } from '@app/bingx-socket/bingx-websocket-serializer';
-import { HeartbeatInterface } from '@app/bingx-socket/interfaces/heartbeat.interface';
-import { filterAndEmitToSubject } from '@app/bingx-socket/operators/filter-and-emit-to-subject';
+import { BingxWebsocketDeserializer } from 'bingx-api/bingx-socket/bingx-websocket-deserializer';
+import { BingxWebsocketSerializer } from 'bingx-api/bingx-socket/bingx-websocket-serializer';
+import { HeartbeatInterface } from 'bingx-api/bingx-socket/interfaces/heartbeat.interface';
+import { filterAndEmitToSubject } from 'bingx-api/bingx-socket/operators/filter-and-emit-to-subject';
 import {
   AccountBalanceAndPositionPushEvent,
   AccountOrderUpdatePushEvent,
   AccountWebSocketEvent,
   AccountWebsocketEventType,
   ListenKeyExpiredEvent,
-} from '@app/bingx-socket/events/account-websocket-events';
+} from 'bingx-api/bingx-socket/events/account-websocket-events';
 import * as WebSocket from 'ws';
 
 export interface BingxAccountSocketStreamConfiguration {

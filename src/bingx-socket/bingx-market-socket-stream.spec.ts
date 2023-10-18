@@ -1,8 +1,8 @@
 import { Server, WebSocket } from 'ws';
-import { getPortFree } from '@app/get-port';
+import { getPortFree } from 'bingx-api/get-port';
 import * as zlib from 'zlib';
 import { skip } from 'rxjs';
-import { BingxMarketSocketStream } from '@app/bingx-socket/bingx-market-socket-stream';
+import { BingxMarketSocketStream } from 'bingx-api/bingx-socket/bingx-market-socket-stream';
 
 describe('bingx market socket stream', () => {
   let wss: Server;

@@ -1,6 +1,6 @@
-import { AccountInterface } from '@app/bingx/account/account.interface';
-import { SignatureParametersInterface } from '@app/bingx/account/signature-parameters.interface';
-import { SignatureInterface } from '@app/bingx/account/signature.interface';
+import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
+import { SignatureParametersInterface } from 'bingx-api/bingx/account/signature-parameters.interface';
+import { SignatureInterface } from 'bingx-api/bingx/account/signature.interface';
 import * as crypto from 'crypto';
 
 export class ApiAccount implements AccountInterface {
