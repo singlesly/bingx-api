@@ -1,7 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { BingxApiClient } from '@app/bingx-client';
-import { HttpRequestExecutor, RequestExecutorInterface } from '@app/bingx';
-import { NestBingxConfigurationInterface } from '@app/nest-bingx/nest-bingx-configuration.interface';
+import { BingxApiClient } from 'bingx-api/bingx-client';
+import { HttpRequestExecutor, RequestExecutorInterface } from 'bingx-api/bingx';
+import { NestBingxConfigurationInterface } from 'bingx-api/nest-bingx/nest-bingx-configuration.interface';
 
 @Module({
   providers: [

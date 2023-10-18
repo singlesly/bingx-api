@@ -1,8 +1,8 @@
-import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
-import { Endpoint } from '@app/bingx/endpoints/endpoint';
-import { SignatureParametersInterface } from '@app/bingx/account/signature-parameters.interface';
-import { DefaultSignatureParameters } from '@app/bingx/account/default-signature-parameters';
-import { BingxGenerateListenKeyResponse } from '@app/bingx/endpoints/bingx-generate-listen-key-response';
+import { EndpointInterface } from 'bingx-api/bingx/endpoints/endpoint.interface';
+import { Endpoint } from 'bingx-api/bingx/endpoints/endpoint';
+import { SignatureParametersInterface } from 'bingx-api/bingx/account/signature-parameters.interface';
+import { DefaultSignatureParameters } from 'bingx-api/bingx/account/default-signature-parameters';
+import { BingxGenerateListenKeyResponse } from 'bingx-api/bingx/endpoints/bingx-generate-listen-key-response';
 
 export class BingxGenerateListenKeyEndpoint<
     R extends BingxGenerateListenKeyResponse,

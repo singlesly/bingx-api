@@ -1,4 +1,4 @@
-import { OrderPositionSideEnum } from '@app/bingx/enums/order-position-side.enum';
+import { OrderPositionSideEnum } from 'bingx-api/bingx/enums/order-position-side.enum';
 
 export interface SwitchLeverageInterface {
   symbol: string;

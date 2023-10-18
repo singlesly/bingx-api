@@ -1,8 +1,8 @@
-import { BingxApiClient } from '@app/bingx-client/bingx-api.client';
-import { HttpRequestExecutor } from '@app/bingx';
-import { ListenKeyService } from '@app/bingx-client/services/listen-key.service';
-import { TradeService } from '@app/bingx-client/services/trade.service';
-import { AccountService } from '@app/bingx-client/services/account.service';
+import { BingxApiClient } from 'bingx-api/bingx-client/bingx-api.client';
+import { HttpRequestExecutor } from 'bingx-api/bingx';
+import { ListenKeyService } from 'bingx-api/bingx-client/services/listen-key.service';
+import { TradeService } from 'bingx-api/bingx-client/services/trade.service';
+import { AccountService } from 'bingx-api/bingx-client/services/account.service';
 
 describe('bingx api client', () => {
   describe('initialize with services', () => {

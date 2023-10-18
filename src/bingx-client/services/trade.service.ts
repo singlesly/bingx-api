@@ -1,15 +1,15 @@
-import { RequestExecutorInterface } from '@app/bingx/request-executor/request-executor.interface';
-import { BingxCreateTradeOrderInterface } from '@app/bingx/interfaces/trade-order.interface';
-import { AccountInterface } from '@app/bingx/account/account.interface';
-import { BingxTradeOrderEndpoint } from '@app/bingx/endpoints/bingx-trade-order-endpoint';
-import { BingxCloseAllPositionsEndpoint } from '@app/bingx/endpoints/bingx-close-all-positions-endpoint';
-import { BingxCancelAllOrdersEndpoint } from '@app/bingx/endpoints/bingx-cancel-all-orders-endpoint';
+import { RequestExecutorInterface } from 'bingx-api/bingx/request-executor/request-executor.interface';
+import { BingxCreateTradeOrderInterface } from 'bingx-api/bingx/interfaces/trade-order.interface';
+import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
+import { BingxTradeOrderEndpoint } from 'bingx-api/bingx/endpoints/bingx-trade-order-endpoint';
+import { BingxCloseAllPositionsEndpoint } from 'bingx-api/bingx/endpoints/bingx-close-all-positions-endpoint';
+import { BingxCancelAllOrdersEndpoint } from 'bingx-api/bingx/endpoints/bingx-cancel-all-orders-endpoint';
 import {
   BingxSwitchMarginModeEndpoint,
   MarginType,
-} from '@app/bingx/endpoints/bingx-switch-margin-mode-endpoint';
-import { BingxSwitchLeverageEndpoint } from '@app/bingx/endpoints/bingx-switch-leverage-endpoint';
-import { OrderPositionSideEnum } from '@app/bingx';
+} from 'bingx-api/bingx/endpoints/bingx-switch-margin-mode-endpoint';
+import { BingxSwitchLeverageEndpoint } from 'bingx-api/bingx/endpoints/bingx-switch-leverage-endpoint';
+import { OrderPositionSideEnum } from 'bingx-api/bingx';
 
 export class TradeService {
   constructor(private readonly requestExecutor: RequestExecutorInterface) {}

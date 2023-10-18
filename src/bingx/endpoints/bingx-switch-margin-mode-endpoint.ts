@@ -4,7 +4,7 @@ import {
   Endpoint,
   EndpointInterface,
   SignatureParametersInterface,
-} from '@app/bingx';
+} from 'bingx-api/bingx';
 
 export interface SwitchMarginModeResponse {
   code: number;

@@ -1,8 +1,8 @@
-import { EndpointInterface } from '@app/bingx/endpoints/endpoint.interface';
-import { ApiKeyHeader } from '@app/bingx/headers/api-key-header';
-import { SignatureParametersInterface } from '@app/bingx/account/signature-parameters.interface';
-import { SignatureInterface } from '@app/bingx/account/signature.interface';
-import { AccountInterface } from '@app/bingx/account/account.interface';
+import { EndpointInterface } from 'bingx-api/bingx/endpoints/endpoint.interface';
+import { ApiKeyHeader } from 'bingx-api/bingx/headers/api-key-header';
+import { SignatureParametersInterface } from 'bingx-api/bingx/account/signature-parameters.interface';
+import { SignatureInterface } from 'bingx-api/bingx/account/signature.interface';
+import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
 
 export abstract class Endpoint<R = unknown> implements EndpointInterface<R> {
   public constructor(protected readonly account: AccountInterface) {}

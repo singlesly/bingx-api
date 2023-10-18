@@ -1,6 +1,6 @@
-import { OrderSideEnum } from '@app/bingx/enums/order-side.enum';
-import { OrderTypeEnum } from '@app/bingx/enums/order-type.enum';
-import { OrderPositionSideEnum } from '@app/bingx/enums/order-position-side.enum';
+import { OrderSideEnum } from 'bingx-api/bingx/enums/order-side.enum';
+import { OrderTypeEnum } from 'bingx-api/bingx/enums/order-type.enum';
+import { OrderPositionSideEnum } from 'bingx-api/bingx/enums/order-position-side.enum';
 
 /**
  * @deprecated

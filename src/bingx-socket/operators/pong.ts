@@ -1,6 +1,6 @@
 import { filter, Observable, OperatorFunction, Subject, tap } from 'rxjs';
 import { WebSocketSubject } from 'rxjs/webSocket';
-import { HeartbeatInterface } from '@app/bingx-socket/interfaces/heartbeat.interface';
+import { HeartbeatInterface } from 'bingx-api/bingx-socket/interfaces/heartbeat.interface';
 
 export function pong<T>(
   socket$: WebSocketSubject<T>,

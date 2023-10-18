@@ -1,9 +1,9 @@
-import { pong } from '@app/bingx';
+import { pong } from 'bingx-api/bingx';
 import { webSocket } from 'rxjs/webSocket';
-import { BingxWebsocketDeserializer } from '@app/bingx-socket/bingx-websocket-deserializer';
-import { BingxWebsocketSerializer } from '@app/bingx-socket/bingx-websocket-serializer';
+import { BingxWebsocketDeserializer } from 'bingx-api/bingx-socket/bingx-websocket-deserializer';
+import { BingxWebsocketSerializer } from 'bingx-api/bingx-socket/bingx-websocket-serializer';
 import * as WebSocket from 'ws';
-import { filterAndEmitToSubject } from '@app/bingx-socket/operators/filter-and-emit-to-subject';
+import { filterAndEmitToSubject } from 'bingx-api/bingx-socket/operators/filter-and-emit-to-subject';
 import {
   BehaviorSubject,
   distinct,
@@ -12,13 +12,13 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
-import { HeartbeatInterface } from '@app/bingx-socket/interfaces/heartbeat.interface';
+import { HeartbeatInterface } from 'bingx-api/bingx-socket/interfaces/heartbeat.interface';
 import {
   LatestTradeEvent,
   MarkerSubscription,
   MarkerWebsocketEvents,
   SubscriptionType,
-} from '@app/bingx-socket/events/marker-websocket-events';
+} from 'bingx-api/bingx-socket/events/marker-websocket-events';
 
 export class BingxMarketSocketStream {
   private forceClose$ = new BehaviorSubject<boolean>(false);

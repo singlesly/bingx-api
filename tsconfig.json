@@ -14,7 +14,7 @@
     "incremental": true,
     "skipLibCheck": true,
     "paths": {
-      "@app/*": ["./src/*"]
+      "bingx-api/*": ["./src/*"]
     }
   }
 }

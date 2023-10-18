@@ -1,4 +1,4 @@
-import { AccountInterface } from '@app/bingx/account/account.interface';
+import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
 
 export class ApiKeyHeader {
   constructor(private readonly apiKey: string | AccountInterface) {}
