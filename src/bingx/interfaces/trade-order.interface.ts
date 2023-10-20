@@ -10,6 +10,7 @@ export interface TradeOrderInterface {
   type: OrderTypeEnum;
   side: OrderSideEnum;
   positionSide?: OrderPositionSideEnum;
+  clientOrderID?: string;
   price?: string; //float64
   quantity?: string; //float64
   stopPrice?: string; //float64
