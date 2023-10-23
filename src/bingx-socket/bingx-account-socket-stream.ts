@@ -49,7 +49,9 @@ export class BingxAccountSocketStream {
         new URL('/swap-market', 'wss://open-api-swap.bingx.com'),
     };
 
-    this.connect(this.account, this.configuration.requestExecutor);
+    this.connect(this.account, this.configuration.requestExecutor).catch(() => {
+      console.error('Cannot connect to account', this.account);
+    });
   }
 
   private async connect(
