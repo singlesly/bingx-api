@@ -4,63 +4,52 @@ import { ApiAccount } from 'bingx-api/bingx/account/api-account';
 import { BingxAccountSocketStream } from 'bingx-api/bingx-socket/bingx-account-socket-stream';
 import * as zlib from 'zlib';
 import { skip } from 'rxjs';
+import {
+  AccountOrderUpdatePushEvent,
+  AccountWebsocketEventType,
+} from 'bingx-api/bingx-socket/events';
 
 describe('bingx account socket stream', () => {
   let wss: Server;
   let port: number;
   const sockets: WebSocket[] = [];
+  const sendToSocket = (socket: WebSocket, msg: string) => {
+    zlib.gzip(msg, (err, result) => {
+      socket.send(result);
+    });
+  };
 
   beforeAll(async () => {
-    port = await getPortFree();
-    wss = new Server({
-      port,
-    });
-    wss.on('connection', (ws) => {
-      sockets[0] = ws;
-
-      ws.on('close', () => {
-        sockets.splice(0, 1);
+    return new Promise(async (resolve) => {
+      port = await getPortFree();
+      wss = new Server({
+        port,
       });
+      wss.on('listening', resolve);
+      wss.on('connection', (ws) => {
+        sockets[0] = ws;
 
-      setInterval(() => {
-        zlib.gzip('Ping', (err, result) => {
-          ws.send(result);
+        ws.on('close', () => {
+          sockets.splice(0, 1);
         });
-      }, 200);
+
+        setInterval(() => {
+          zlib.gzip('Ping', (err, result) => {
+            ws.send(result);
+          });
+        }, 200);
+      });
     });
   });
 
-  afterAll(() => {
+  afterAll((done) => {
+    wss.on('close', done);
     wss.close();
   });
 
   it('websocket server is running', () => {
     expect(wss.address()).toMatchObject({
       port,
-    });
-  });
-
-  describe('initialize connect', () => {
-    const requestExecutorMock = {
-      execute: jest.fn().mockResolvedValueOnce({ data: { listenKey: '123' } }),
-    };
-    let stream: BingxAccountSocketStream;
-    beforeAll(() => {
-      const account = new ApiAccount('xxx', 'xxx');
-      stream = new BingxAccountSocketStream(account, {
-        requestExecutor: requestExecutorMock,
-        url: new URL('', `ws://0.0.0.0:${port}`),
-      });
-    });
-
-    it('must be got listen key', () => {
-      // expect(requestExecutorMock.execute).toHaveBeenCalledTimes(1);
-    });
-
-    it('must be got heartbeat', (done) => {
-      stream.heartbeat$.subscribe(() => {
-        done();
-      });
     });
   });
 
@@ -110,7 +99,7 @@ describe('bingx account socket stream', () => {
     });
 
     it('must be got listen key', () => {
-      // expect(requestExecutorMock.execute).toHaveBeenCalledTimes(1);
+      expect(requestExecutorMock.execute).toHaveBeenCalledTimes(1);
     });
 
     it('must be got disconnected', (done) => {
@@ -161,6 +150,49 @@ describe('bingx account socket stream', () => {
           });
         });
       });
+    });
+  });
+
+  describe('order trade update', () => {
+    const requestExecutorMock = {
+      execute: jest.fn().mockResolvedValueOnce({ data: { listenKey: '123' } }),
+    };
+    let stream: BingxAccountSocketStream;
+    beforeAll(() => {
+      const account = new ApiAccount('xxx', 'xxx');
+      stream = new BingxAccountSocketStream(account, {
+        requestExecutor: requestExecutorMock,
+        url: new URL('', `ws://0.0.0.0:${port}`),
+      });
+    });
+
+    afterAll(() => {
+      stream.disconnect();
+    });
+
+    it('must be got listen key', () => {
+      expect(requestExecutorMock.execute).toHaveBeenCalledTimes(1);
+    });
+
+    it('must be got order push', (done) => {
+      stream.accountOrderUpdatePushEvent$.subscribe((e) => {
+        expect(e).toStrictEqual({
+          e: AccountWebsocketEventType.ORDER_TRADE_UPDATE,
+          o: {},
+          E: 111,
+        } as AccountOrderUpdatePushEvent);
+        done();
+      });
+      setTimeout(() => {
+        sendToSocket(
+          sockets[0],
+          JSON.stringify({
+            e: AccountWebsocketEventType.ORDER_TRADE_UPDATE,
+            o: {},
+            E: 111,
+          } as AccountOrderUpdatePushEvent),
+        );
+      }, 1000);
     });
   });
 });
