@@ -27,7 +27,7 @@ export interface BingxTradeOrderInterface {
   price?: string;
   quantity?: string;
   stopPrice?: string;
-  clientOrderId?: string;
+  clientOrderID?: string;
   timestamp?: string;
   recvWindow?: string;
   timeInForce?: string;
