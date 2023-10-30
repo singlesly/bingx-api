@@ -22,7 +22,9 @@ export interface PerpetualSwapPositionsData<
   leverage: number;
 }
 
-export class BingxPerpetualSwapPositionsEndpoint<R = PerpetualSwapPositionsData>
+export class BingxPerpetualSwapPositionsEndpoint<
+    R = PerpetualSwapPositionsData[],
+  >
   extends Endpoint
   implements EndpointInterface<BingxResponse<R>>
 {
