@@ -1,6 +1,6 @@
 import { EndpointInterface } from 'bingx-api/bingx/endpoints/endpoint.interface';
 import { Endpoint } from 'bingx-api/bingx/endpoints/endpoint';
-import { SignatureParametersInterface } from '../account/signature-parameters.interface';
+import { BingxResponse, SignatureParametersInterface } from 'bingx-api/bingx';
 import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
 import { BingxCreateTradeOrderInterface } from 'bingx-api/bingx/interfaces/trade-order.interface';
 import { DefaultSignatureParameters } from 'bingx-api/bingx/account/default-signature-parameters';
@@ -21,7 +21,7 @@ export interface BingxOrderResponseInterface {
 
 export class BingxTradeOrderEndpoint<R = BingxOrderResponseInterface>
   extends Endpoint
-  implements EndpointInterface<R>
+  implements EndpointInterface<BingxResponse<R>>
 {
   constructor(
     private readonly order: BingxCreateTradeOrderInterface,
@@ -30,7 +30,7 @@ export class BingxTradeOrderEndpoint<R = BingxOrderResponseInterface>
     super(account);
   }
 
-  readonly t!: R;
+  readonly t!: BingxResponse<R>;
 
   method(): 'get' | 'post' | 'put' | 'patch' | 'delete' {
     return 'post';

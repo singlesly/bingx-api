@@ -4,6 +4,7 @@ import { SignatureParametersInterface } from 'bingx-api/bingx/account/signature-
 import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
 import { DefaultSignatureParameters } from 'bingx-api/bingx/account/default-signature-parameters';
 import { OrderPositionSideEnum } from 'bingx-api/bingx/enums/order-position-side.enum';
+import { BingxResponse } from 'bingx-api/bingx';
 
 export interface PerpetualSwapPositionsData<
   T extends number | string = string,
@@ -23,7 +24,7 @@ export interface PerpetualSwapPositionsData<
 
 export class BingxPerpetualSwapPositionsEndpoint<R = PerpetualSwapPositionsData>
   extends Endpoint
-  implements EndpointInterface<R>
+  implements EndpointInterface<BingxResponse<R>>
 {
   constructor(
     private readonly symbol: string,
@@ -46,5 +47,5 @@ export class BingxPerpetualSwapPositionsEndpoint<R = PerpetualSwapPositionsData>
     return '/openApi/swap/v2/user/positions';
   }
 
-  readonly t!: R;
+  readonly t!: BingxResponse<R>;
 }

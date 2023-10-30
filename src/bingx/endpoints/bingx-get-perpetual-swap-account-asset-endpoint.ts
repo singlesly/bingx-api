@@ -4,6 +4,7 @@ import { SignatureInterface } from 'bingx-api/bingx/account/signature.interface'
 import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
 import { DefaultSignatureParameters } from 'bingx-api/bingx/account/default-signature-parameters';
 import { SignatureParametersInterface } from 'bingx-api/bingx/account/signature-parameters.interface';
+import { BingxResponse } from 'bingx-api/bingx';
 
 export interface BalanceData {
   balance: {
@@ -20,7 +21,7 @@ export interface BalanceData {
 }
 
 export class BingxGetPerpetualSwapAccountAssetEndpoint<R = BalanceData>
-  implements EndpointInterface<R>
+  implements EndpointInterface<BingxResponse<R>>
 {
   constructor(private readonly account: AccountInterface) {}
 
@@ -44,5 +45,5 @@ export class BingxGetPerpetualSwapAccountAssetEndpoint<R = BalanceData>
     return this.account.sign(this.parameters());
   }
 
-  readonly t!: R;
+  readonly t!: BingxResponse<R>;
 }
