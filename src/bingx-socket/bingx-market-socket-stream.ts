@@ -16,9 +16,9 @@ import { HeartbeatInterface } from 'bingx-api/bingx-socket/interfaces/heartbeat.
 import {
   LatestTradeEvent,
   MarkerSubscription,
-  MarkerWebsocketEvents,
+  MarketWebsocketEvents,
   SubscriptionType,
-} from 'bingx-api/bingx-socket/events/marker-websocket-events';
+} from 'bingx-api/bingx-socket/events/market-websocket-events';
 
 export class BingxMarketSocketStream {
   private forceClose$ = new BehaviorSubject<boolean>(false);
@@ -36,7 +36,7 @@ export class BingxMarketSocketStream {
   }
 
   private async connect(url: URL): Promise<void> {
-    const socket$ = webSocket<MarkerWebsocketEvents | MarkerSubscription>({
+    const socket$ = webSocket<MarketWebsocketEvents | MarkerSubscription>({
       deserializer: (e) => new BingxWebsocketDeserializer().deserializer(e),
       serializer: (e) => new BingxWebsocketSerializer().serializer(e),
       url: url.toString(),
