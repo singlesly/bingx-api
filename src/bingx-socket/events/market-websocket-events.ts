@@ -19,16 +19,21 @@ export type TradeDataType = `${TradingPair}@trade`;
 
 export type SubscriptionType = TradeDataType;
 
-export interface MarkerWebsocketEvents {
+export interface MarketWebsocketEvents {
   code: MarkerWebsocketEventCode;
   dataType: SubscriptionType;
 }
 
-export interface LatestTradeEvent extends MarkerWebsocketEvents {
-  dataType: TradeDataType;
+export interface TradeDetail {
   T: TransactionTimeInMillis;
   s: TradingPair;
   m: IsMarketMaker;
   p: Price;
-  v: Volume;
+  v: Volume; // Assuming 'q' represents volume
+}
+
+export interface LatestTradeEvent extends MarketWebsocketEvents {
+  code: MarkerWebsocketEventCode;
+  dataType: TradeDataType;
+  data: TradeDetail[];
 }

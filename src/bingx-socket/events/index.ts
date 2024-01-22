@@ -4,11 +4,11 @@ export {
   SubscriptionType,
   LatestTradeEvent,
   TradeDataType,
-  MarkerWebsocketEvents,
+  MarketWebsocketEvents,
   Price,
   Volume,
   MarkerWebsocketEventCode,
   IsMarketMaker,
   TransactionTimeInMillis,
   MarkerSubscription,
-} from './marker-websocket-events';
+} from './market-websocket-events';
