@@ -2,10 +2,10 @@ import {
   AccountInterface,
   BingxResponse,
   DefaultSignatureParameters,
-  Endpoint,
   EndpointInterface,
   SignatureParametersInterface,
 } from 'bingx-api/bingx';
+import { Endpoint } from 'bingx-api/bingx/endpoints/endpoint';
 import { BingxUserHistoryOrdersResponse } from 'bingx-api/bingx/endpoints/bingx-user-history-orders-response';
 
 export class BingxUserHistoryOrdersEndpoint<
