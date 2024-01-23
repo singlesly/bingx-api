@@ -33,11 +33,13 @@
     "@nestjs/platform-express": "^10.0.0",
     "axios": "^1.5.1",
     "axios-request-throttle": "^1.0.0",
+    "date-fns": "^3.3.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "ws": "^8.14.2"
   },
   "devDependencies": {
+    "@ledius/env": "^1.0.2",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
