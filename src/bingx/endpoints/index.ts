@@ -10,3 +10,5 @@ export * from './bingx-response.interface';
 export * from './bingx-trade-order-endpoint';
 export * from './endpoint.interface';
 export * from './endpoint';
+export * from './bingx-user-history-orders-endpoint';
+export * from './bingx-user-history-orders-response';
