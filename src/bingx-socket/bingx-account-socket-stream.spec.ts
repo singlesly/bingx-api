@@ -179,7 +179,7 @@ describe('bingx account socket stream', () => {
         expect(e).toStrictEqual({
           e: AccountWebsocketEventType.ORDER_TRADE_UPDATE,
           o: {},
-          E: 111,
+          E: '111',
         } as AccountOrderUpdatePushEvent);
         done();
       });
@@ -189,8 +189,68 @@ describe('bingx account socket stream', () => {
           JSON.stringify({
             e: AccountWebsocketEventType.ORDER_TRADE_UPDATE,
             o: {},
-            E: 111,
+            E: '111',
           } as AccountOrderUpdatePushEvent),
+        );
+      }, 1000);
+    });
+  });
+
+  describe('#68 fix big number in order identifier', () => {
+    const requestExecutorMock = {
+      execute: jest.fn().mockResolvedValueOnce({ data: { listenKey: '123' } }),
+    };
+    let stream: BingxAccountSocketStream;
+    beforeAll(() => {
+      const account = new ApiAccount('xxx', 'xxx');
+      stream = new BingxAccountSocketStream(account, {
+        requestExecutor: requestExecutorMock,
+        url: new URL('', `ws://0.0.0.0:${port}`),
+      });
+    });
+
+    afterAll(() => {
+      stream.disconnect();
+    });
+
+    it('must be got listen key', () => {
+      expect(requestExecutorMock.execute).toHaveBeenCalledTimes(1);
+    });
+
+    it('must be got order push', (done) => {
+      stream.accountOrderUpdatePushEvent$.subscribe((e) => {
+        expect(e).toStrictEqual({
+          e: AccountWebsocketEventType.ORDER_TRADE_UPDATE,
+          o: {
+            N: 'USDT',
+            S: 'BUY',
+            T: '0',
+            X: 'NEW',
+            c: '',
+            i: '172998235239792314304',
+            n: '0.00000000',
+            o: 'TRIGGER_MARKET',
+            p: '',
+            q: '0.00100000',
+            s: 'BTC-USDT',
+            x: 'TRADE',
+            z: '0.00000000',
+            ap: '0.00000000',
+            ps: 'LONG',
+            rp: '0.00000000',
+            sp: '43495.00000000',
+            wt: 'MARK_PRICE',
+          },
+          E: '1706736600541',
+        } as AccountOrderUpdatePushEvent);
+        done();
+      });
+      setTimeout(() => {
+        sendToSocket(
+          sockets[0],
+          '{"E":1706736600541,"e":"ORDER_TRADE_UPDATE","o":{"N":"USDT","S":"BUY","T":0,"X":"NEW","c":"","i":172998235239792314304,' +
+            '"n":"0.00000000","o":"TRIGGER_MARKET","p":"","q":"0.00100000","s":"BTC-USDT",' +
+            '"x":"TRADE","z":"0.00000000","ap":"0.00000000","ps":"LONG","rp":"0.00000000","sp":"43495.00000000","wt":"MARK_PRICE"}}',
         );
       }, 1000);
     });

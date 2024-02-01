@@ -3,6 +3,7 @@ import { lastValueFrom } from 'rxjs';
 import { BingxRequestInterface } from 'bingx-api/bingx/endpoints/bingx-request.interface';
 import { HttpService } from '@nestjs/axios';
 import axios from 'axios';
+import * as JSONBigNumber from 'json-bignumber';
 
 export class BingxRequest<R> implements BingxRequestInterface<R> {
   private readonly http = new HttpService(
@@ -10,6 +11,14 @@ export class BingxRequest<R> implements BingxRequestInterface<R> {
       baseURL: 'https://open-api.bingx.com',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      transformResponse: (res) => {
+        try {
+          return JSON.parse(JSON.stringify(JSONBigNumber.parse(res)));
+        } catch (e) {
+          console.error(e);
+          return res;
+        }
       },
     }),
   );
