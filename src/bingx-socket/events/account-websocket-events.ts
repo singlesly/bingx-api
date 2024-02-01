@@ -20,6 +20,7 @@ export enum WebSocketOrderType {
   STOP = 'STOP',
   TAKE_PROFIT = 'TAKE_PROFIT',
   LIQUIDATION = 'LIQUIDATION',
+  TRIGGER_MARKET = 'TRIGGER_MARKET',
 }
 
 export enum WebSocketOrderExecutionType {
@@ -44,7 +45,7 @@ export enum WebSocketTriggerPriceType {
   INDEX_PRICE = 'INDEX_PRICE',
 }
 
-export type EventTimeInMilliseconds = number;
+export type EventTimeInMilliseconds = string;
 
 /**
  * Relates account events
@@ -65,13 +66,13 @@ export type IsolatedPositionMargin = number;
  */
 export type ClientCustomOrderId = string;
 export type OrderId = string;
-export type Quantity = number;
-export type Price = number;
-export type AveragePrice = number;
-export type HandlingFee = number;
-export type TransactionTime = number;
-export type TransactionAchievedProfitAndLoss = number;
-export type OrderFilledAccumulatedQuantity = number;
+export type Quantity = string;
+export type Price = string;
+export type AveragePrice = string;
+export type HandlingFee = string;
+export type TransactionTime = string;
+export type TransactionAchievedProfitAndLoss = string;
+export type OrderFilledAccumulatedQuantity = string;
 export type FeeAssetType = string;
 
 export interface AccountBalanceInformation {

@@ -24,6 +24,15 @@ export class TradeService {
     );
   }
 
+  public async createTradeOrderTest(
+    order: BingxCreateTradeOrderInterface,
+    account: AccountInterface,
+  ) {
+    return this.requestExecutor.execute(
+      new BingxTradeOrderEndpoint(order, account),
+    );
+  }
+
   public async getUserHistoryOrders(
     symbol: string,
     limit: number,
