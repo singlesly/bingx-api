@@ -16,7 +16,7 @@ export class BingxRequest<R> implements BingxRequestInterface<R> {
         try {
           return JSON.parse(JSON.stringify(JSONBigNumber.parse(res)));
         } catch (e) {
-          console.error(e);
+          console.error('BingxRequest.http.transformResponse', e, res);
           return res;
         }
       },
