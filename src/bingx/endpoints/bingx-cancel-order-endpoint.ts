@@ -1,10 +1,8 @@
-import {
-  AccountInterface,
-  DefaultSignatureParameters,
-  Endpoint,
-  EndpointInterface,
-  SignatureParametersInterface,
-} from 'bingx-api/bingx';
+import { AccountInterface } from '../account/account.interface';
+import { DefaultSignatureParameters } from '../account/default-signature-parameters';
+import { SignatureParametersInterface } from '../account/signature-parameters.interface';
+import { Endpoint } from './endpoint';
+import { EndpointInterface } from './endpoint.interface';
 
 export class BingxCancelOrderEndpoint<R = unknown>
   extends Endpoint
