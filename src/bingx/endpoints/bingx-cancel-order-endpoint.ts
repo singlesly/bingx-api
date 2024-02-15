@@ -11,6 +11,7 @@ export class BingxCancelOrderEndpoint<R = unknown>
   constructor(
     account: AccountInterface,
     private readonly orderId: string,
+    private readonly symbol: string,
   ) {
     super(account);
   }
@@ -21,6 +22,7 @@ export class BingxCancelOrderEndpoint<R = unknown>
   parameters(): SignatureParametersInterface {
     return new DefaultSignatureParameters({
       orderId: this.orderId,
+      symbol: this.symbol,
     });
   }
   path(): string {
