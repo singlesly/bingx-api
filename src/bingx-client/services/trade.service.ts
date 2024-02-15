@@ -34,9 +34,13 @@ export class TradeService {
     );
   }
 
-  public async cancelOrder(orderId: string, account: AccountInterface) {
+  public async cancelOrder(
+    orderId: string,
+    symbol: string,
+    account: AccountInterface,
+  ) {
     return this.requestExecutor.execute(
-      new BingxCancelOrderEndpoint(account, orderId),
+      new BingxCancelOrderEndpoint(account, orderId, symbol),
     );
   }
 
