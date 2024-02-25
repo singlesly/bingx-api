@@ -100,6 +100,10 @@ export class BingxAccountSocketStreamPool {
     this.accounts[account.getApiKey()] = [account, stream];
   }
 
+  public getAccounts() {
+    return this.accounts;
+  }
+
   public removeAccount(account: AccountInterface) {
     if (this.accounts[account.getApiKey()]) {
       const [sacrifice, stream] = this.accounts[account.getApiKey()];
