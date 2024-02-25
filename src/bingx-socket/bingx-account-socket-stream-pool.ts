@@ -95,9 +95,14 @@ export class BingxAccountSocketStreamPool {
 
     if (this.accounts[account.getApiKey()]) {
       this.accounts[account.getApiKey()][1].disconnect();
+      this.accounts[account.getApiKey()][1].disconnect();
     }
 
     this.accounts[account.getApiKey()] = [account, stream];
+  }
+
+  public getAccounts() {
+    return this.accounts;
   }
 
   public removeAccount(account: AccountInterface) {
