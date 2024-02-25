@@ -95,6 +95,7 @@ export class BingxAccountSocketStreamPool {
 
     if (this.accounts[account.getApiKey()]) {
       this.accounts[account.getApiKey()][1].disconnect();
+      this.accounts[account.getApiKey()][1].disconnect();
     }
 
     this.accounts[account.getApiKey()] = [account, stream];

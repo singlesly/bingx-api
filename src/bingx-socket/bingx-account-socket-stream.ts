@@ -103,6 +103,9 @@ export class BingxAccountSocketStream {
 
     this.onDisconnect$.subscribe(() => {
       socketSubscription.unsubscribe();
+      console.log(
+        `${BingxAccountSocketStream.name} disconnected ${account.getApiKey()}`,
+      );
     });
 
     this.forceClose$.subscribe((v) => {
