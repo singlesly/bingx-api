@@ -7,6 +7,7 @@ export * from './bingx-get-server-time-endpoint';
 export * from './bingx-perpetual-swap-positions-endpoint';
 export * from './bingx-request.interface';
 export * from './bingx-response.interface';
+export * from './bingx-query-order-endpoint';
 export * from './bingx-trade-order-endpoint';
 export * from './endpoint.interface';
 export * from './endpoint';
