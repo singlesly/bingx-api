@@ -55,7 +55,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
     - [x] Get Perpetual Swap Account Asset Information
     - [x] Perpetual Swap Positions
     - [ ] Get Account Profit and Loss Fund Flow
-    - [ ] Export fund flow
+    - [x] Export fund flow
     - [ ] User fee rate
 * Trade Interface
     - [ ] Trade order test

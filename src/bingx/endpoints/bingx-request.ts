@@ -5,6 +5,19 @@ import { HttpService } from '@nestjs/axios';
 import axios from 'axios';
 import * as JSONBigNumber from 'json-bignumber';
 
+export function transformBingxResponse(res: unknown) {
+  if (typeof res !== 'string') {
+    return res;
+  }
+
+  try {
+    return JSON.parse(JSON.stringify(JSONBigNumber.parse(res)));
+  } catch (e) {
+    console.error('BingxRequest.http.transformResponse', e, res);
+    return res;
+  }
+}
+
 export class BingxRequest<R> implements BingxRequestInterface<R> {
   private readonly http = new HttpService(
     axios.create({
@@ -12,14 +25,7 @@ export class BingxRequest<R> implements BingxRequestInterface<R> {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      transformResponse: (res) => {
-        try {
-          return JSON.parse(JSON.stringify(JSONBigNumber.parse(res)));
-        } catch (e) {
-          console.error('BingxRequest.http.transformResponse', e, res);
-          return res;
-        }
-      },
+      transformResponse: transformBingxResponse,
     }),
   );
 
@@ -34,6 +40,7 @@ export class BingxRequest<R> implements BingxRequestInterface<R> {
           signature: this.endpoint.signature().toString(),
         },
         headers: this.endpoint.apiKey().asHeader(),
+        responseType: this.endpoint.responseType?.(),
         url: this.endpoint.path(),
       }),
     );

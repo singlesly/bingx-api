@@ -1,4 +1,3 @@
-import { OrderTypeEnum } from 'bingx-api/bingx/enums/order-type.enum';
 import { OrderSideEnum } from 'bingx-api/bingx/enums/order-side.enum';
 import { OrderStatusEnum } from 'bingx-api/bingx/enums/order-status.enum';
 import { OrderPositionSideEnum } from 'bingx-api/bingx/enums/order-position-side.enum';
