@@ -1,3 +1,4 @@
+export * from './adjust-isolated-margin.interface';
 export * from './bingx-order.interface';
 export * from './bingx-response';
 export * from './cancel-all-orders.response';

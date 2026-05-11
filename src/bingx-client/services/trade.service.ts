@@ -12,6 +12,8 @@ import { BingxSwitchLeverageEndpoint } from 'bingx-api/bingx/endpoints/bingx-swi
 import { OrderPositionSideEnum } from 'bingx-api/bingx';
 import { BingxUserHistoryOrdersEndpoint } from 'bingx-api/bingx/endpoints/bingx-user-history-orders-endpoint';
 import { BingxCancelOrderEndpoint } from 'bingx-api/bingx/endpoints/bingx-cancel-order-endpoint';
+import { BingxAdjustIsolatedMarginEndpoint } from 'bingx-api/bingx/endpoints/bingx-adjust-isolated-margin-endpoint';
+import { BingxAdjustIsolatedMarginInterface } from 'bingx-api/bingx/interfaces/adjust-isolated-margin.interface';
 
 export class TradeService {
   constructor(private readonly requestExecutor: RequestExecutorInterface) {}
@@ -92,6 +94,15 @@ export class TradeService {
   ) {
     return this.requestExecutor.execute(
       new BingxSwitchLeverageEndpoint(symbol, leverage, side, account),
+    );
+  }
+
+  public adjustIsolatedMargin(
+    options: BingxAdjustIsolatedMarginInterface,
+    account: AccountInterface,
+  ) {
+    return this.requestExecutor.execute(
+      new BingxAdjustIsolatedMarginEndpoint(options, account),
     );
   }
 }

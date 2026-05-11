@@ -73,7 +73,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
     - [ ] Switch Leverage
     - [ ] User's Force Orders
     - [x] User's History Orders
-    - [ ] Adjust isolated margin
+    - [x] Adjust isolated margin
     - [ ] Query historical transaction orders
 * Listen Key
     - [x] Generate Listen Key
