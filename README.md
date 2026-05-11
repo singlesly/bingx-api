@@ -60,7 +60,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
 * Trade Interface
     - [ ] Trade order test
     - [x] Trade order
-    - [ ] Bulk order
+    - [x] Bulk order
     - [x] One-Click Close All Positions
     - [ ] Cancel an Order
     - [ ] Cancel a Batch of Orders

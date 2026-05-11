@@ -1,4 +1,5 @@
 export * from './bingx-cancel-all-orders-endpoint';
+export * from './bingx-bulk-order-endpoint';
 export * from './bingx-close-all-positions-endpoint';
 export * from './bingx-generate-listen-key-endpoint';
 export * from './bingx-generate-listen-key-response';
