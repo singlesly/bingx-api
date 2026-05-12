@@ -81,9 +81,9 @@ stream.latestTradeDetail$.subscribe((v) => {})
     - [ ] Delete Listen Key
 * Socket API
     * Market Data
-        - [ ] Subscribe Market Depth Data
+        - [x] Subscribe Market Depth Data
         - [x] Subscribe the Latest Trade Detail
-        - [ ] Subscribe K-Line Data
+        - [x] Subscribe K-Line Data
     * Account Data
         - [x] Listen Key expired push
         - [x] Account balance and position update push
