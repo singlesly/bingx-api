@@ -74,6 +74,8 @@ export type TransactionTime = string;
 export type TransactionAchievedProfitAndLoss = string;
 export type OrderFilledAccumulatedQuantity = string;
 export type FeeAssetType = string;
+export type LongPositionLeverage = string | number;
+export type ShortPositionLeverage = string | number;
 
 export interface AccountBalanceInformation {
   a: AssetName;
@@ -112,6 +114,13 @@ export interface AccountWebSocketOrder {
   z: OrderFilledAccumulatedQuantity;
 }
 
+export interface AccountConfiguration {
+  s: TradingPair;
+  l: LongPositionLeverage;
+  S: ShortPositionLeverage;
+  mt: MarginMode;
+}
+
 export interface AccountUpdateEvent {
   m: AccountUpdateEventLaunchReason;
   B: AccountBalanceInformation[];
@@ -139,4 +148,10 @@ export interface AccountOrderUpdatePushEvent extends AccountWebSocketEvent {
   e: AccountWebsocketEventType.ORDER_TRADE_UPDATE;
   E: EventTimeInMilliseconds;
   o: AccountWebSocketOrder;
+}
+
+export interface AccountConfigUpdatePushEvent extends AccountWebSocketEvent {
+  e: AccountWebsocketEventType.ACCOUNT_CONFIG_UPDATE;
+  E: EventTimeInMilliseconds;
+  ac: AccountConfiguration;
 }

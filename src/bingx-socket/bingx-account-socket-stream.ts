@@ -13,6 +13,7 @@ import { HeartbeatInterface } from 'bingx-api/bingx-socket/interfaces/heartbeat.
 import { filterAndEmitToSubject } from 'bingx-api/bingx-socket/operators/filter-and-emit-to-subject';
 import {
   AccountBalanceAndPositionPushEvent,
+  AccountConfigUpdatePushEvent,
   AccountOrderUpdatePushEvent,
   AccountWebSocketEvent,
   AccountWebsocketEventType,
@@ -36,6 +37,8 @@ export class BingxAccountSocketStream {
     new Subject<AccountBalanceAndPositionPushEvent>();
   public readonly accountOrderUpdatePushEvent$ =
     new Subject<AccountOrderUpdatePushEvent>();
+  public readonly accountConfigUpdate$ =
+    new Subject<AccountConfigUpdatePushEvent>();
 
   constructor(
     private readonly account: AccountInterface,
@@ -98,14 +101,22 @@ export class BingxAccountSocketStream {
             event.e === AccountWebsocketEventType.ORDER_TRADE_UPDATE,
           this.accountOrderUpdatePushEvent$,
         ),
+        filterAndEmitToSubject(
+          (event): event is AccountConfigUpdatePushEvent =>
+            event.e === AccountWebsocketEventType.ACCOUNT_CONFIG_UPDATE,
+          this.accountConfigUpdate$,
+        ),
       )
       .subscribe();
 
     this.onDisconnect$.subscribe(() => {
       socketSubscription.unsubscribe();
-      console.log(
-        `${BingxAccountSocketStream.name} disconnected ${account.getApiKey()}`,
-      );
+
+      if (!this.forceClose$.value) {
+        this.connect(account, requestExecutor).catch(() => {
+          console.error('Cannot reconnect to account', account);
+        });
+      }
     });
 
     this.forceClose$.subscribe((v) => {

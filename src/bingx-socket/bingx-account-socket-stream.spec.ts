@@ -5,6 +5,7 @@ import { BingxAccountSocketStream } from 'bingx-api/bingx-socket/bingx-account-s
 import * as zlib from 'zlib';
 import { skip } from 'rxjs';
 import {
+  AccountConfigUpdatePushEvent,
   AccountOrderUpdatePushEvent,
   AccountWebsocketEventType,
 } from 'bingx-api/bingx-socket/events';
@@ -30,10 +31,13 @@ describe('bingx account socket stream', () => {
         sockets[0] = ws;
 
         ws.on('close', () => {
-          sockets.splice(0, 1);
+          if (sockets[0] === ws) {
+            sockets.splice(0, 1);
+          }
+          clearInterval(pingInterval);
         });
 
-        setInterval(() => {
+        const pingInterval = setInterval(() => {
           zlib.gzip('Ping', (err, result) => {
             ws.send(result);
           });
@@ -251,6 +255,59 @@ describe('bingx account socket stream', () => {
           '{"E":1706736600541,"e":"ORDER_TRADE_UPDATE","o":{"N":"USDT","S":"BUY","T":0,"X":"NEW","c":"","i":172998235239792314304,' +
             '"n":"0.00000000","o":"TRIGGER_MARKET","p":"","q":"0.00100000","s":"BTC-USDT",' +
             '"x":"TRADE","z":"0.00000000","ap":"0.00000000","ps":"LONG","rp":"0.00000000","sp":"43495.00000000","wt":"MARK_PRICE"}}',
+        );
+      }, 1000);
+    });
+  });
+
+  describe('account config update', () => {
+    const requestExecutorMock = {
+      execute: jest.fn().mockResolvedValueOnce({ data: { listenKey: '123' } }),
+    };
+    let stream: BingxAccountSocketStream;
+    beforeAll(() => {
+      const account = new ApiAccount('xxx', 'xxx');
+      stream = new BingxAccountSocketStream(account, {
+        requestExecutor: requestExecutorMock,
+        url: new URL('', `ws://0.0.0.0:${port}`),
+      });
+    });
+
+    afterAll(() => {
+      stream.disconnect();
+    });
+
+    it('must be got listen key', () => {
+      expect(requestExecutorMock.execute).toHaveBeenCalledTimes(1);
+    });
+
+    it('must be got account config update', (done) => {
+      stream.accountConfigUpdate$.subscribe((e) => {
+        expect(e).toStrictEqual({
+          e: AccountWebsocketEventType.ACCOUNT_CONFIG_UPDATE,
+          E: '1777593600000',
+          ac: {
+            s: 'BTC-USDT',
+            l: '20',
+            S: '10',
+            mt: 'isolated',
+          },
+        } as AccountConfigUpdatePushEvent);
+        done();
+      });
+      setTimeout(() => {
+        sendToSocket(
+          sockets[0],
+          JSON.stringify({
+            e: AccountWebsocketEventType.ACCOUNT_CONFIG_UPDATE,
+            E: 1777593600000,
+            ac: {
+              s: 'BTC-USDT',
+              l: 20,
+              S: 10,
+              mt: 'isolated',
+            },
+          }),
         );
       }, 1000);
     });

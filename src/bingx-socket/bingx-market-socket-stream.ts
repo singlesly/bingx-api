@@ -14,10 +14,16 @@ import {
 } from 'rxjs';
 import { HeartbeatInterface } from 'bingx-api/bingx-socket/interfaces/heartbeat.interface';
 import {
+  DepthInterval,
+  DepthLevel,
+  KlineEvent,
+  KlineInterval,
   LatestTradeEvent,
   MarkerSubscription,
+  MarketDepthEvent,
   MarketWebsocketEvents,
   SubscriptionType,
+  TradingPair,
 } from 'bingx-api/bingx-socket/events/market-websocket-events';
 
 export class BingxMarketSocketStream {
@@ -28,6 +34,8 @@ export class BingxMarketSocketStream {
   public readonly onDisconnect$ = new Subject<CloseEvent>();
   public readonly heartbeat$ = new ReplaySubject<HeartbeatInterface>(1);
   public readonly latestTradeDetail$ = new Subject<LatestTradeEvent>();
+  public readonly marketDepth$ = new Subject<MarketDepthEvent>();
+  public readonly kline$ = new Subject<KlineEvent>();
 
   constructor(
     url: URL = new URL('/swap-market', 'wss://open-api-swap.bingx.com'),
@@ -52,6 +60,15 @@ export class BingxMarketSocketStream {
           (event): event is LatestTradeEvent =>
             event.dataType.includes('trade'),
           this.latestTradeDetail$,
+        ),
+        filterAndEmitToSubject(
+          (event): event is MarketDepthEvent =>
+            /@depth\d+@/.test(event.dataType),
+          this.marketDepth$,
+        ),
+        filterAndEmitToSubject(
+          (event): event is KlineEvent => event.dataType.includes('@kline_'),
+          this.kline$,
         ),
       )
       .subscribe();
@@ -91,5 +108,17 @@ export class BingxMarketSocketStream {
 
   public subscribe(dataType: SubscriptionType) {
     this.dataTypes$.next(dataType);
+  }
+
+  public subscribeMarketDepth(
+    symbol: TradingPair,
+    level: DepthLevel = 20,
+    interval: DepthInterval = '500ms',
+  ) {
+    this.subscribe(`${symbol}@depth${level}@${interval}`);
+  }
+
+  public subscribeKline(symbol: TradingPair, interval: KlineInterval) {
+    this.subscribe(`${symbol}@kline_${interval}`);
   }
 }
