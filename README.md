@@ -65,7 +65,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
     - [ ] Cancel an Order
     - [ ] Cancel a Batch of Orders
     - [ ] Cancel All Orders
-    - [ ] Query all current pending orders
+    - [x] Query all current pending orders
     - [ ] Query Order
     - [ ] Query Margin Mode
     - [ ] Switch Margin Mode
