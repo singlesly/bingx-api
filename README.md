@@ -69,7 +69,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
     - [ ] Query Order
     - [ ] Query Margin Mode
     - [ ] Switch Margin Mode
-    - [ ] Query Leverage
+    - [x] Query Leverage
     - [ ] Switch Leverage
     - [ ] User's Force Orders
     - [x] User's History Orders
