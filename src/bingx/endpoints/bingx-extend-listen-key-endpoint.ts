@@ -1,10 +1,8 @@
-import {
-  AccountInterface,
-  DefaultSignatureParameters,
-  Endpoint,
-  EndpointInterface,
-  SignatureParametersInterface,
-} from 'bingx-api/bingx';
+import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
+import { DefaultSignatureParameters } from 'bingx-api/bingx/account/default-signature-parameters';
+import { SignatureParametersInterface } from 'bingx-api/bingx/account/signature-parameters.interface';
+import { Endpoint } from 'bingx-api/bingx/endpoints/endpoint';
+import { EndpointInterface } from 'bingx-api/bingx/endpoints/endpoint.interface';
 
 export class BingxExtendListenKeyEndpoint<R = void>
   extends Endpoint
