@@ -63,7 +63,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
     - [ ] Bulk order
     - [x] One-Click Close All Positions
     - [ ] Cancel an Order
-    - [ ] Cancel a Batch of Orders
+    - [x] Cancel a Batch of Orders
     - [ ] Cancel All Orders
     - [ ] Query all current pending orders
     - [ ] Query Order
