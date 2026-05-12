@@ -9,6 +9,7 @@ import {
   MarginType,
 } from 'bingx-api/bingx/endpoints/bingx-switch-margin-mode-endpoint';
 import { BingxSwitchLeverageEndpoint } from 'bingx-api/bingx/endpoints/bingx-switch-leverage-endpoint';
+import { BingxQueryMarginModeEndpoint } from 'bingx-api/bingx/endpoints/bingx-query-margin-mode-endpoint';
 import { OrderPositionSideEnum } from 'bingx-api/bingx';
 import { BingxUserHistoryOrdersEndpoint } from 'bingx-api/bingx/endpoints/bingx-user-history-orders-endpoint';
 import { BingxCancelOrderEndpoint } from 'bingx-api/bingx/endpoints/bingx-cancel-order-endpoint';
@@ -81,6 +82,12 @@ export class TradeService {
   ) {
     return this.requestExecutor.execute(
       new BingxSwitchMarginModeEndpoint(symbol, marginType, account),
+    );
+  }
+
+  public queryMarginMode(symbol: string, account: AccountInterface) {
+    return this.requestExecutor.execute(
+      new BingxQueryMarginModeEndpoint(symbol, account),
     );
   }
 
