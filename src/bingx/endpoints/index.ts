@@ -1,5 +1,7 @@
 export * from './bingx-cancel-all-orders-endpoint';
 export * from './bingx-close-all-positions-endpoint';
+export * from './bingx-delete-listen-key-endpoint';
+export * from './bingx-extend-listen-key-endpoint';
 export * from './bingx-generate-listen-key-endpoint';
 export * from './bingx-generate-listen-key-response';
 export * from './bingx-get-perpetual-swap-account-asset-endpoint';
