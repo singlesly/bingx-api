@@ -74,7 +74,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
     - [ ] User's Force Orders
     - [x] User's History Orders
     - [ ] Adjust isolated margin
-    - [ ] Query historical transaction orders
+    - [x] Query historical transaction orders
 * Listen Key
     - [x] Generate Listen Key
     - [ ] Extend Listen Key Validity period
