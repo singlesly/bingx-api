@@ -71,7 +71,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
     - [ ] Switch Margin Mode
     - [ ] Query Leverage
     - [ ] Switch Leverage
-    - [ ] User's Force Orders
+    - [x] User's Force Orders
     - [x] User's History Orders
     - [ ] Adjust isolated margin
     - [ ] Query historical transaction orders

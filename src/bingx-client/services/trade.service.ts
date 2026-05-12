@@ -12,6 +12,10 @@ import { BingxSwitchLeverageEndpoint } from 'bingx-api/bingx/endpoints/bingx-swi
 import { OrderPositionSideEnum } from 'bingx-api/bingx';
 import { BingxUserHistoryOrdersEndpoint } from 'bingx-api/bingx/endpoints/bingx-user-history-orders-endpoint';
 import { BingxCancelOrderEndpoint } from 'bingx-api/bingx/endpoints/bingx-cancel-order-endpoint';
+import {
+  BingxUserForceOrdersEndpoint,
+  BingxUserForceOrdersOptions,
+} from 'bingx-api/bingx/endpoints/bingx-user-force-orders-endpoint';
 
 export class TradeService {
   constructor(private readonly requestExecutor: RequestExecutorInterface) {}
@@ -59,6 +63,15 @@ export class TradeService {
         endTime,
         account,
       ),
+    );
+  }
+
+  public async getUserForceOrders(
+    options: BingxUserForceOrdersOptions,
+    account: AccountInterface,
+  ) {
+    return this.requestExecutor.execute(
+      new BingxUserForceOrdersEndpoint(options, account),
     );
   }
 
