@@ -12,6 +12,7 @@ import { BingxWebsocketSerializer } from 'bingx-api/bingx-socket/bingx-websocket
 import { HeartbeatInterface } from 'bingx-api/bingx-socket/interfaces/heartbeat.interface';
 import { filterAndEmitToSubject } from 'bingx-api/bingx-socket/operators/filter-and-emit-to-subject';
 import {
+  AccountConfigurationUpdateEvent,
   AccountBalanceAndPositionPushEvent,
   AccountOrderUpdatePushEvent,
   AccountWebSocketEvent,
@@ -36,6 +37,8 @@ export class BingxAccountSocketStream {
     new Subject<AccountBalanceAndPositionPushEvent>();
   public readonly accountOrderUpdatePushEvent$ =
     new Subject<AccountOrderUpdatePushEvent>();
+  public readonly accountConfigurationUpdate$ =
+    new Subject<AccountConfigurationUpdateEvent>();
 
   constructor(
     private readonly account: AccountInterface,
@@ -97,6 +100,11 @@ export class BingxAccountSocketStream {
           (event): event is AccountOrderUpdatePushEvent =>
             event.e === AccountWebsocketEventType.ORDER_TRADE_UPDATE,
           this.accountOrderUpdatePushEvent$,
+        ),
+        filterAndEmitToSubject(
+          (event): event is AccountConfigurationUpdateEvent =>
+            event.e === AccountWebsocketEventType.ACCOUNT_CONFIG_UPDATE,
+          this.accountConfigurationUpdate$,
         ),
       )
       .subscribe();

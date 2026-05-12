@@ -88,4 +88,4 @@ stream.latestTradeDetail$.subscribe((v) => {})
         - [x] Listen Key expired push
         - [x] Account balance and position update push
         - [x] Order update push
-        - [ ] Configuration updates such as leverage and margin mode
+        - [x] Configuration updates such as leverage and margin mode

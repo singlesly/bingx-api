@@ -60,6 +60,7 @@ export type EntryPrice = number;
 export type UnrealizedProfitAndLossPosition = number;
 export type MarginMode = string;
 export type IsolatedPositionMargin = number;
+export type AccountConfigLeverage = string | number;
 
 /**
  * Relates to order update events
@@ -139,4 +140,17 @@ export interface AccountOrderUpdatePushEvent extends AccountWebSocketEvent {
   e: AccountWebsocketEventType.ORDER_TRADE_UPDATE;
   E: EventTimeInMilliseconds;
   o: AccountWebSocketOrder;
+}
+
+export interface AccountConfiguration {
+  s: TradingPair;
+  l: AccountConfigLeverage;
+  S: AccountConfigLeverage;
+  mt: MarginMode;
+}
+
+export interface AccountConfigurationUpdateEvent extends AccountWebSocketEvent {
+  e: AccountWebsocketEventType.ACCOUNT_CONFIG_UPDATE;
+  E: EventTimeInMilliseconds;
+  ac: AccountConfiguration;
 }
