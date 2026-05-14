@@ -2,6 +2,7 @@ import { RequestExecutorInterface } from 'bingx-api/bingx/request-executor/reque
 import { BingxCreateTradeOrderInterface } from 'bingx-api/bingx/interfaces/trade-order.interface';
 import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
 import { BingxTradeOrderEndpoint } from 'bingx-api/bingx/endpoints/bingx-trade-order-endpoint';
+import { BingxTradeOrderTestEndpoint } from 'bingx-api/bingx/endpoints/bingx-trade-order-test-endpoint';
 import { BingxCloseAllPositionsEndpoint } from 'bingx-api/bingx/endpoints/bingx-close-all-positions-endpoint';
 import { BingxCancelAllOrdersEndpoint } from 'bingx-api/bingx/endpoints/bingx-cancel-all-orders-endpoint';
 import {
@@ -30,7 +31,7 @@ export class TradeService {
     account: AccountInterface,
   ) {
     return this.requestExecutor.execute(
-      new BingxTradeOrderEndpoint(order, account),
+      new BingxTradeOrderTestEndpoint(order, account),
     );
   }
 
