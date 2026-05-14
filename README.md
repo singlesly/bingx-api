@@ -58,7 +58,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
     - [ ] Export fund flow
     - [ ] User fee rate
 * Trade Interface
-    - [ ] Trade order test
+    - [x] Trade order test
     - [x] Trade order
     - [ ] Bulk order
     - [x] One-Click Close All Positions
