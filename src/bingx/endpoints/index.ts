@@ -13,3 +13,4 @@ export * from './endpoint';
 export * from './bingx-user-history-orders-endpoint';
 export * from './bingx-user-history-orders-response';
 export * from './bingx-cancel-order-endpoint';
+export * from './bingx-user-fee-rate-endpoint';
