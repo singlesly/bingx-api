@@ -1,6 +1,7 @@
 import { AccountInterface } from 'bingx-api/bingx/account/account.interface';
 import { BingxGenerateListenKeyEndpoint } from 'bingx-api/bingx/endpoints/bingx-generate-listen-key-endpoint';
 import { BingxGenerateListenKeyResponse } from 'bingx-api/bingx/endpoints/bingx-generate-listen-key-response';
+import { BingxExtendListenKeyEndpoint } from 'bingx-api/bingx/endpoints/bingx-extend-listen-key-endpoint';
 import { RequestExecutorInterface } from 'bingx-api/bingx/request-executor/request-executor.interface';
 
 export class ListenKeyService {
@@ -11,6 +12,15 @@ export class ListenKeyService {
   ): Promise<BingxGenerateListenKeyResponse> {
     return this.requestExecutor.execute(
       new BingxGenerateListenKeyEndpoint(account),
+    );
+  }
+
+  async extendListenKey(
+    listenKey: string,
+    account: AccountInterface,
+  ): Promise<void> {
+    return this.requestExecutor.execute(
+      new BingxExtendListenKeyEndpoint(listenKey, account),
     );
   }
 }
