@@ -78,7 +78,7 @@ stream.latestTradeDetail$.subscribe((v) => {})
 * Listen Key
     - [x] Generate Listen Key
     - [ ] Extend Listen Key Validity period
-    - [ ] Delete Listen Key
+    - [x] Delete Listen Key
 * Socket API
     * Market Data
         - [ ] Subscribe Market Depth Data
